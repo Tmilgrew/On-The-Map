@@ -14,12 +14,25 @@ class StudentMapViewController : UIViewController, MKMapViewDelegate {
     
     //var students:[ParseStudent] = [ParseStudent]()
     @IBOutlet weak var mapView: MKMapView!
-    
+    var students = Storage.students
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         self.refresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
+            if let results = result {
+                self.students = results
+                performUIUpdatesOnMain {
+                    self.refresh()
+                }
+            }else{
+                print (error ?? "empty error")
+            }
+        }
     }
     
     func refresh() {

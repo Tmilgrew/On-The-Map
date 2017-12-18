@@ -21,7 +21,6 @@ class NewLocationController: UIViewController {
     
     @IBAction func pushToMap(_ sender: Any) {
         debugText.text = ""
-        var coordinate: CLLocationCoordinate2D
         
         guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
             displayError("Please enter a portfolio domain")
@@ -55,6 +54,16 @@ class NewLocationController: UIViewController {
         controller.mapString = locationTextField.text
         present(controller, animated: true, completion: nil)
     }
+    
+    
+    
+    @IBAction func cancel(_ sender: Any) {
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
     
     private func displayError(_ errorString: String?) {
         if let errorString = errorString {

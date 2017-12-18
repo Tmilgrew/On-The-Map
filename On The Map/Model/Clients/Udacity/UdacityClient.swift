@@ -36,15 +36,14 @@ class UdacityClient : NSObject {
         
         let task = session.dataTask(with: request) { data, response, error in
             
-            func sendError(_ error: String) {
-                print(error)
+            func sendError(_ errorString: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForPOST(nil, NSError(domain: "taskforPOSTMethod", code: 1, userInfo: userInfo))
             }
             
             /* Was there an error? */
-            guard (error == nil) else {
-                sendError("There was an error with your request: \(error)")
+            guard error == nil else {
+                sendError(error?.localizedDescription as! String)
                 return
             }
             

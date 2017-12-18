@@ -11,14 +11,30 @@ import UIKit
 
 class MainTabController: UITabBarController {
     
+    var students = Storage.students
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    func refresh(){
+        ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
+            if let results = result {
+                self.students = results
+            } else {
+                print("There was an error refreshing.")
+            }
+        }
+        (self.viewControllers![0] as! StudentListViewController).refresh()
+        (self.viewControllers![1] as! StudentMapViewController).refresh()
     }
     
     @IBAction func refresh(sender: UIButton){
         ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
             if let results = result {
-                students = results
+                self.students = results
             } else {
                 print("There was an error refreshing.")
             }

@@ -62,6 +62,15 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
         //post new location and then return to main screen.  call refresh
     }
     
+    
+    
+    @IBAction func cancel(_ sender: Any) {
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"

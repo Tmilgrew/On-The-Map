@@ -14,7 +14,7 @@ extension ParseClient {
     
     func getMultipleStudents(completionHandlerForMultipleStudents: @escaping (_ results: [ParseStudent]?, _ error: NSError?) -> Void){
         
-        let parameters = [ParseClient.ParameterKeys.Limit: "100"]
+        let parameters = [ParseClient.ParameterKeys.Limit: "100", ParseClient.ParameterKeys.Order: "-updatedAt"]
         let method: String = Methods.MultiStudentLocation
         
         let _ = taskForGETMethod(method, parameters: parameters as [String:AnyObject]) { (results, error) in

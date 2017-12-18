@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Model/Clients/Udacity/UdacityClient.swift"
-            timestampString = "534559304.732035"
+            timestampString = "535007192.346943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/StudentListViewController.swift"
-            timestampString = "534919193.614347"
+            timestampString = "535261815.104714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/StudentListViewController.swift"
-            timestampString = "534919193.615084"
+            timestampString = "535261815.104813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/NewLocationController.swift"
-            timestampString = "534833745.206236"
+            timestampString = "535261815.104884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "showNewLocation(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/NewLocationController.swift"
-            timestampString = "534833745.206287"
+            timestampString = "535261815.104955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "showNewLocation(_:)"
             landmarkType = "7">
             <Locations>
@@ -102,31 +102,31 @@
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "On_The_Map.NewLocationController.(showNewLocation in _31132CE15CE59CB782E84766FB9D458E)() -&gt; ()"
+                  symbolName = "On_The_Map.NewLocationController.(showNewLocation in _31132CE15CE59CB782E84766FB9D458E)(__C.CLLocationCoordinate2D) -&gt; ()"
                   moduleName = "On The Map"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thomasmilgrew/Documents/iOSProjects/On%20The%20Map/On%20The%20Map/Controllers/NewLocationController.swift"
-                  timestampString = "534529779.015923"
+                  timestampString = "535251700.500965"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "17">
+                  offsetFromSymbolStart = "27">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "On_The_Map.NewLocationController.(showNewLocation in _31132CE15CE59CB782E84766FB9D458E)() -&gt; ()"
+                  symbolName = "On_The_Map.NewLocationController.(showNewLocation in _31132CE15CE59CB782E84766FB9D458E)(__C.CLLocationCoordinate2D) -&gt; ()"
                   moduleName = "On The Map"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thomasmilgrew/Documents/iOSProjects/On%20The%20Map/On%20The%20Map/Controllers/NewLocationController.swift"
-                  timestampString = "534529779.019811"
+                  timestampString = "535251700.50605"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "896">
+                  offsetFromSymbolStart = "2024">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Model/Clients/Udacity/UdacityClient.swift"
-            timestampString = "534559304.733238"
+            timestampString = "535007192.347834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/NewLocationMapController.swift"
-            timestampString = "534919193.615763"
+            timestampString = "535261815.105073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -218,12 +218,50 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "On The Map/Controllers/NewLocationMapController.swift"
-            timestampString = "534919193.61588"
+            timestampString = "535261815.105136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "On The Map/Controllers/NewLocationController.swift"
+            timestampString = "535261815.105195"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "pushToMap(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

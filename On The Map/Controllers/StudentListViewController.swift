@@ -13,6 +13,8 @@ class StudentListViewController: UIViewController{
     
     //var students:[ParseStudent] = [ParseStudent]()
     @IBOutlet weak var studentTableView: UITableView!
+    var students = Storage.students
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,7 +23,7 @@ class StudentListViewController: UIViewController{
         
         ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
             if let results = result {
-                students = results
+                self.students = results
                 performUIUpdatesOnMain {
                     self.studentTableView!.reloadData()
                 }
@@ -45,7 +47,7 @@ class StudentListViewController: UIViewController{
     func refresh(){
         ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
             if let results = result {
-                students = results
+                self.students = results
                 performUIUpdatesOnMain {
                     self.studentTableView!.reloadData()
                 }

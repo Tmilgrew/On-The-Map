@@ -42,13 +42,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if (emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty){
             debugTextLabel.text = "Enter Username and/or Password"
         } else {
-            UdacityClient.sharedInstance().authenticate(emailTextField.text!, passwordTextField.text!, self) { (success, errorString) in
+            UdacityClient.sharedInstance().authenticate(emailTextField.text!, passwordTextField.text!, self) { (success, error) in
                 performUIUpdatesOnMain {
                     if success {
                         self.debugTextLabel.text = "SUCCESS!!"
                         self.completeLogin()
                     } else {
-                        self.displayError("\(errorString)")
+                        if let error = error{
+                            self.displayError("\(error.localizedDescription)")
+                        }
+                        
                     }
                 }
             }
@@ -64,9 +67,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         present(controller, animated: true, completion: nil)
     }
     
-    private func displayError(_ errorString: String?) {
-        if let errorString = errorString {
+    private func displayError(_ error: String?) {
+        if let errorString = error {
             debugTextLabel.text = errorString
+        } else {
+            debugTextLabel.text = "unkown error"
         }
     }
 }

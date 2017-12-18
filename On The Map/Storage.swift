@@ -9,8 +9,8 @@
 import Foundation
 
 
-    
+class Storage {
     // Student list for map and table
-    var students: [ParseStudent] = [ParseStudent]()
+    static var students: [ParseStudent] = [ParseStudent]()
     
-
+}
