@@ -16,6 +16,7 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     var mapString: String!
     var studentAnnotation = [MKPointAnnotation]()
     
+    @IBOutlet weak var debugTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -51,6 +52,9 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
         print(newStudent)
         ParseClient.sharedInstance().postStudentLocation(newStudent) { (results, error) in
             
+            if error != nil {
+                self.displayError("\(error?.localizedDescription)")
+            }
             self.newStudent.objectID = results!["objectId"] as? String
             performUIUpdatesOnMain {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
@@ -60,6 +64,14 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
         }
         
         //post new location and then return to main screen.  call refresh
+    }
+    
+    private func displayError(_ error: String?) {
+        if let errorString = error {
+            debugTextField.text = errorString
+        } else {
+            debugTextField.text = "unkown error"
+        }
     }
     
     

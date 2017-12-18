@@ -17,6 +17,7 @@ class NewLocationController: UIViewController {
     @IBOutlet weak var portfolioTextField: UITextField!
     @IBOutlet weak var debugText: UITextView!
     var geoCoder = CLGeocoder()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     
     @IBAction func pushToMap(_ sender: Any) {
@@ -31,6 +32,8 @@ class NewLocationController: UIViewController {
             displayError("Please enter your city and state")
             return
         }
+        
+        activityIndicator.startAnimating()
         
         geoCoder.geocodeAddressString(location){(placemark, error) in
             guard error == nil else {
@@ -52,6 +55,7 @@ class NewLocationController: UIViewController {
         controller.coordinate = coordinate
         controller.url = portfolioTextField.text
         controller.mapString = locationTextField.text
+        activityIndicator.stopAnimating()
         present(controller, animated: true, completion: nil)
     }
     
