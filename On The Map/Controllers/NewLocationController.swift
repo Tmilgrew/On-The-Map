@@ -17,54 +17,41 @@ class NewLocationController: UIViewController {
     @IBOutlet weak var portfolioTextField: UITextField!
     @IBOutlet weak var debugText: UITextView!
     var geoCoder = CLGeocoder()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     
-    @IBAction func pushToMap(_ sender: Any) {
-        debugText.text = ""
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
-            displayError("Please enter a portfolio domain")
-            return
-        }
         
-        guard let location = locationTextField.text, location != "" else {
-            displayError("Please enter your city and state")
-            return
-        }
-        
-        activityIndicator.startAnimating()
-        
-        geoCoder.geocodeAddressString(location){(placemark, error) in
-            guard error == nil else {
-                self.displayError("Please enter a valid location")
+        if segue.identifier == "showLocation"{
+            let controller = segue.destination as! NewLocationMapController
+            
+            debugText.text = ""
+            
+            guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
+                displayError("Please enter a portfolio domain")
                 return
             }
             
-            let coordinate = placemark?.first?.location?.coordinate
-            
-            
-            performUIUpdatesOnMain {
-                self.showNewLocation(coordinate!)
+            guard let location = locationTextField.text, location != "" else {
+                displayError("Please enter your city and state")
+                return
             }
+            
+            controller.location = location
+            
+            
+            
+            controller.url = self.portfolioTextField.text
+            controller.mapString = self.locationTextField.text
+            
         }
     }
     
-    private func showNewLocation(_ coordinate:CLLocationCoordinate2D){
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewLocationMapController") as! NewLocationMapController
-        controller.coordinate = coordinate
-        controller.url = portfolioTextField.text
-        controller.mapString = locationTextField.text
-        activityIndicator.stopAnimating()
-        present(controller, animated: true, completion: nil)
-    }
-    
-    
-    
     @IBAction func cancel(_ sender: Any) {
-        
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
-        present(controller, animated: true, completion: nil)
+        let controller = self.navigationController!.viewControllers[0]
+        let _ = self.navigationController?.popToViewController(controller, animated: true)
     }
     
     
@@ -74,17 +61,5 @@ class NewLocationController: UIViewController {
             debugText.text = errorString
         }
     }
-    
-//    private func configurePlacemarkData(_ placemarks:[CLPlacemark]?) -> CLLocationCoordinate2D {
-//
-//        var location: CLLocation?
-//
-//        if let placemarks = placemarks, placemarks.count > 0 {
-//            location = placemarks.first?.location
-//        }
-//
-//        let coordinate = location?.coordinate
-//        return coordinate!
-//    }
 }
 

@@ -111,22 +111,6 @@
             </objects>
             <point key="canvasLocation" x="966" y="143"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ft5-6G-31b">
-            <objects>
-                <navigationController id="Wgu-MH-77T" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yh5-ba-cnm">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Lsd-ng-OJG" kind="relationship" relationship="rootViewController" id="AE4-au-LXL"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rx2-NG-Zdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="137" y="1001"/>
-        </scene>
         <!--New Location Controller-->
         <scene sceneID="qOn-yc-C6h">
             <objects>
@@ -155,7 +139,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="pushToMap:" destination="Lsd-ng-OJG" eventType="touchUpInside" id="4RT-Xx-vhe"/>
+                                    <segue destination="Ace-aE-VMR" kind="show" identifier="showLocation" id="A1C-6g-eaE"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kve-Xk-t7n">
@@ -227,7 +211,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9dg-Ya-mkE">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9dg-Ya-mkE">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYI-bf-pNC">
@@ -286,7 +270,11 @@
             <objects>
                 <tabBarController id="lKR-gw-b7m" customClass="MainTabController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="gDS-s1-ZnD">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="lDL-Ve-Kd3"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="lDL-Ve-Kd3">
+                            <connections>
+                                <action selector="logout:" destination="lKR-gw-b7m" id="zCO-BV-LAn"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" id="mfn-ZN-5jR">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Stb-FF-HEt">
@@ -294,7 +282,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_addpin"/>
                                     <connections>
-                                        <action selector="showNewLocationSetupWithSender:" destination="lKR-gw-b7m" eventType="touchUpInside" id="EVM-Wn-Ddi"/>
+                                        <segue destination="Lsd-ng-OJG" kind="show" id="YoD-cB-3qF"/>
                                     </connections>
                                 </button>
                             </barButtonItem>

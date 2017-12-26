@@ -32,6 +32,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        emailTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -69,9 +74,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func displayError(_ error: String?) {
         if let errorString = error {
-            debugTextLabel.text = errorString
+            performUIUpdatesOnMain {
+                self.debugTextLabel.text = errorString
+            }
         } else {
-            debugTextLabel.text = "unkown error"
+            performUIUpdatesOnMain {
+                self.debugTextLabel.text = "unkown error"
+            }
         }
     }
 }

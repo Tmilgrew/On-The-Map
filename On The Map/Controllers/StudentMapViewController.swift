@@ -36,7 +36,12 @@ class StudentMapViewController : UIViewController, MKMapViewDelegate {
     }
     
     func refresh() {
+        
+        if (self.viewIfLoaded == nil){
+            return
+        }
         mapView.removeAnnotations(mapView.annotations)
+        
         
         var annotations = [MKPointAnnotation]()
         

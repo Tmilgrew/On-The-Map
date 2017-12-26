@@ -14,7 +14,10 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     var coordinate: CLLocationCoordinate2D!
     var url: String!
     var mapString: String!
+    var location: String!
     var studentAnnotation = [MKPointAnnotation]()
+    var geoCoder = CLGeocoder()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     @IBOutlet weak var debugTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,26 +25,36 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UdacityClient.sharedInstance().getUserInfo() {(results, error) in
-            print(results)
+        activityIndicator.startAnimating()
+        geoCoder.geocodeAddressString(location){(placemark, error) in
+            guard error == nil else {
+                self.displayError("Please enter a valid location")
+                return
+            }
             
-            self.newStudent = ParseStudent(dictionary: results)
-            //print(self.newStudent)
+            let coordinate = placemark?.first?.location?.coordinate
+            self.coordinate = coordinate
             
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = self.coordinate
-            annotation.title = "\(self.newStudent.firstName as! String) \(self.newStudent.lastName as! String)"
-            annotation.subtitle = self.url
-            
-            self.studentAnnotation.append(annotation)
-            
-            performUIUpdatesOnMain {
-                self.mapView.addAnnotations(self.studentAnnotation)
+            UdacityClient.sharedInstance().getUserInfo() {(results, error) in
+                print(results)
+                
+                self.newStudent = ParseStudent(dictionary: results)
+                //print(self.newStudent)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = self.coordinate
+                annotation.title = "\(self.newStudent.firstName as! String) \(self.newStudent.lastName as! String)"
+                annotation.subtitle = self.url
+                
+                self.studentAnnotation.append(annotation)
+                
+                performUIUpdatesOnMain {
+                    self.mapView.addAnnotations(self.studentAnnotation)
+                    self.activityIndicator.stopAnimating()
+                }
             }
             
         }
-        
-        
     }
     
     @IBAction func addLocation(_ sender: Any) {
@@ -57,8 +70,10 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
             }
             self.newStudent.objectID = results!["objectId"] as? String
             performUIUpdatesOnMain {
-                let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
-                self.present(controller, animated: true, completion: nil)
+                
+                let controller = self.navigationController!.viewControllers[0]
+                let _ = self.navigationController?.popToViewController(controller, animated: true)
+                
             }
             
         }
@@ -77,8 +92,8 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func cancel(_ sender: Any) {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
-        present(controller, animated: true, completion: nil)
+        let controller = self.navigationController!.viewControllers[0]
+        let _ = self.navigationController?.popToViewController(controller, animated: true)
     }
     
     

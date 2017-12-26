@@ -43,11 +43,9 @@ class MainTabController: UITabBarController {
         (self.viewControllers![1] as! StudentMapViewController).refresh()
     }
     
-    @IBAction func showNewLocationSetup(sender: UIButton){
-        let storyboard = self.storyboard
-        let controller = storyboard?.instantiateViewController(withIdentifier: "NewLocationController") as! NewLocationController
-        
-        self.present(controller, animated: true, completion: nil)
+    
+    @IBAction func logout(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
