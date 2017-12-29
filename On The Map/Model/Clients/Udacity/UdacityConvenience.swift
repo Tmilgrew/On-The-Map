@@ -11,7 +11,7 @@ import UIKit
 
 extension UdacityClient {
     
-    func authenticate(_ username:String,_ password: String, _ hostViewController: UIViewController, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: NSError?) -> Void){
+    func authenticate(_ username:String,_ password: String, _ hostViewController: UIViewController, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void){
         
         getSessionID(username, password) {(results, errorString) in
             
@@ -29,7 +29,7 @@ extension UdacityClient {
     }
     
     
-    func getSessionID(_ username: String, _ password: String, _ completionHandlerForToken: @escaping (_ results: [String]?, _ errorString: NSError?) -> Void){
+    func getSessionID(_ username: String, _ password: String, _ completionHandlerForToken: @escaping (_ results: [String]?, _ errorString: String?) -> Void){
         
         let parameters = [String:AnyObject]()
         let jsonBody = "{\"\(JSONBodyKeys.Udacity)\": {\"\(JSONBodyKeys.Username)\": \"\(username)\", \"\(JSONBodyKeys.Password)\": \"\(password)\"}}"
@@ -41,10 +41,10 @@ extension UdacityClient {
         request.httpBody = jsonBody.data(using: .utf8)
         
         let session = URLSession.shared
-        let _ = taskForPOSTMethod(UdacityClient.Methods.Session, parameters: parameters, jsonBody: jsonBody) { (result, error) in
+        let _ = taskForPOSTMethod(UdacityClient.Methods.Session, parameters: parameters, jsonBody: jsonBody) { (result, errorString) in
             
-            if let error = error {
-                completionHandlerForToken(nil, error)
+            if let error = errorString {
+                completionHandlerForToken(nil, errorString)
             } else {
                 guard let sessionObject = result![UdacityClient.JSONResponseKeys.Session] as? [String:String] else {
                     print("Could not find \(UdacityClient.JSONResponseKeys.Session) in \(result)")

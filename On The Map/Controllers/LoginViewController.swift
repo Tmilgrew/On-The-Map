@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: BorderedButton!
     @IBOutlet weak var debugTextLabel: UILabel!
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+
     
     
     override func viewDidLoad() {
@@ -30,6 +32,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,21 +52,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if (emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty){
             debugTextLabel.text = "Enter Username and/or Password"
         } else {
-            UdacityClient.sharedInstance().authenticate(emailTextField.text!, passwordTextField.text!, self) { (success, error) in
-                performUIUpdatesOnMain {
-                    if success {
+            
+            activityIndicator.startAnimating()
+            UdacityClient.sharedInstance().authenticate(emailTextField.text!, passwordTextField.text!, self) { (success, errorString) in
+                
+                if let error = errorString {
+                    self.displayError("\(error)")
+                }else {
+                    performUIUpdatesOnMain {
                         self.debugTextLabel.text = "SUCCESS!!"
                         self.completeLogin()
-                    } else {
-                        if let error = error{
-                            self.displayError("\(error.localizedDescription)")
-                        }
-                        
                     }
                 }
             }
-        
-        
         }
     }
     
@@ -70,16 +73,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         debugTextLabel.text = ""
         let controller = storyboard!.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
         present(controller, animated: true, completion: nil)
+        activityIndicator.stopAnimating()
     }
     
     private func displayError(_ error: String?) {
+        
         if let errorString = error {
             performUIUpdatesOnMain {
-                self.debugTextLabel.text = errorString
+                self.debugTextLabel.text = String(errorString)
+                self.activityIndicator.stopAnimating()
             }
         } else {
             performUIUpdatesOnMain {
-                self.debugTextLabel.text = "unkown error"
+                self.debugTextLabel.text = "unknown error"
+                self.activityIndicator.stopAnimating()
             }
         }
     }

@@ -17,13 +17,18 @@ class NewLocationController: UIViewController {
     @IBOutlet weak var portfolioTextField: UITextField!
     @IBOutlet weak var debugText: UITextView!
     var geoCoder = CLGeocoder()
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     
-    
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
+        activityIndicator.startAnimating()
         if segue.identifier == "showLocation"{
             let controller = segue.destination as! NewLocationMapController
             
@@ -47,6 +52,7 @@ class NewLocationController: UIViewController {
             controller.mapString = self.locationTextField.text
             
         }
+        activityIndicator.stopAnimating()
     }
     
     @IBAction func cancel(_ sender: Any) {

@@ -21,7 +21,7 @@ class UdacityClient : NSObject {
 //
 //    }
     
-    func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ errorString: String?) -> Void) -> URLSessionDataTask {
         
         //Set the parameters
         let parameters = parameters
@@ -38,7 +38,8 @@ class UdacityClient : NSObject {
             
             func sendError(_ errorString: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForPOST(nil, NSError(domain: "taskforPOSTMethod", code: 1, userInfo: userInfo))
+
+                completionHandlerForPOST(nil, errorString)
             }
             
             /* Was there an error? */

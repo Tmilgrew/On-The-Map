@@ -12,23 +12,28 @@ import MapKit
 class NewLocationMapController: UIViewController, MKMapViewDelegate {
     var newStudent: ParseStudent!
     var coordinate: CLLocationCoordinate2D!
+    //var region: MKCoordinateRegion!
     var url: String!
     var mapString: String!
     var location: String!
     var studentAnnotation = [MKPointAnnotation]()
     var geoCoder = CLGeocoder()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
-    @IBOutlet weak var debugTextField: UITextField!
+    @IBOutlet weak var debugTextLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var finishButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        finishButton.isEnabled = true
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         geoCoder.geocodeAddressString(location){(placemark, error) in
             guard error == nil else {
-                self.displayError("Please enter a valid location")
+                self.displayError(error?.localizedDescription)
                 return
             }
             
@@ -36,8 +41,11 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
             self.coordinate = coordinate
             
             UdacityClient.sharedInstance().getUserInfo() {(results, error) in
-                print(results)
-                
+                //print(results)
+                guard error == nil else {
+                    self.displayError(error?.localizedDescription)
+                    return
+                }
                 self.newStudent = ParseStudent(dictionary: results)
                 //print(self.newStudent)
                 
@@ -48,8 +56,11 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
                 
                 self.studentAnnotation.append(annotation)
                 
+                var region = MKCoordinateRegion(center: self.coordinate, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+                
                 performUIUpdatesOnMain {
                     self.mapView.addAnnotations(self.studentAnnotation)
+                    self.mapView.setRegion(region, animated: true)
                     self.activityIndicator.stopAnimating()
                 }
             }
@@ -82,11 +93,14 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     }
     
     private func displayError(_ error: String?) {
+        finishButton.isEnabled = false
+        finishButton.backgroundColor = UIColor.gray
         if let errorString = error {
-            debugTextField.text = errorString
+            debugTextLabel.text = errorString
         } else {
-            debugTextField.text = "unkown error"
+            debugTextLabel.text = "unkown error"
         }
+        activityIndicator.stopAnimating()
     }
     
     

@@ -12,14 +12,17 @@ import UIKit
 class MainTabController: UITabBarController {
     
     var students = Storage.students
-
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
     }
     
     func refresh(){
+        activityIndicator.startAnimating()
         ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
             if let results = result {
                 self.students = results
@@ -29,6 +32,7 @@ class MainTabController: UITabBarController {
         }
         (self.viewControllers![0] as! StudentListViewController).refresh()
         (self.viewControllers![1] as! StudentMapViewController).refresh()
+        activityIndicator.stopAnimating()
     }
     
     @IBAction func refresh(sender: UIButton){

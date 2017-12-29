@@ -66,10 +66,10 @@
                                             <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qqV-bx-4Jp"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2I-Er-aPv" userLabel="Debug Text Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2I-Er-aPv" userLabel="Debug Text Label">
                                         <rect key="frame" x="0.0" y="298" width="343" height="329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="1" green="0.02955916426" blue="0.055790593479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -231,33 +231,37 @@
                                     <action selector="cancel:" destination="Ace-aE-VMR" eventType="touchUpInside" id="zDE-SF-hcS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVW-6w-d89">
-                                <rect key="frame" x="99" y="514" width="178" height="30"/>
-                                <color key="textColor" red="1" green="0.024252239544259702" blue="0.066344962767057925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSr-Wv-544">
+                                <rect key="frame" x="61" y="483" width="253" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="qi5-2V-8Qn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.02955916426" blue="0.055790593479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dO0-ni-Txl" firstAttribute="leading" secondItem="U7T-3l-rjS" secondAttribute="leadingMargin" constant="145" id="0Hx-Un-d3M"/>
+                            <constraint firstItem="rYI-bf-pNC" firstAttribute="top" secondItem="OSr-Wv-544" secondAttribute="bottom" constant="8" id="0NM-JB-jpB"/>
                             <constraint firstItem="rYI-bf-pNC" firstAttribute="leading" secondItem="U7T-3l-rjS" secondAttribute="leadingMargin" constant="83" id="2eZ-Qy-6zx"/>
-                            <constraint firstItem="BVW-6w-d89" firstAttribute="leading" secondItem="U7T-3l-rjS" secondAttribute="leadingMargin" constant="83" id="BHU-7D-SqU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OSr-Wv-544" secondAttribute="trailing" constant="45" id="Chl-wA-BYS"/>
                             <constraint firstAttribute="bottomMargin" secondItem="rYI-bf-pNC" secondAttribute="bottom" constant="85" id="HdB-SB-qz9"/>
                             <constraint firstItem="dO0-ni-Txl" firstAttribute="top" secondItem="rYI-bf-pNC" secondAttribute="bottom" constant="8" id="MYv-Ji-Abl"/>
-                            <constraint firstItem="rYI-bf-pNC" firstAttribute="top" secondItem="BVW-6w-d89" secondAttribute="bottom" constant="8" id="Qgq-fP-8Jz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dO0-ni-Txl" secondAttribute="trailing" constant="145" id="RWg-U4-yfd"/>
                             <constraint firstItem="9dg-Ya-mkE" firstAttribute="leading" secondItem="U7T-3l-rjS" secondAttribute="leadingMargin" constant="-16" id="Tdh-Yc-dcE"/>
                             <constraint firstItem="9dg-Ya-mkE" firstAttribute="top" secondItem="U7T-3l-rjS" secondAttribute="topMargin" constant="-20" id="gpL-rQ-2X9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rYI-bf-pNC" secondAttribute="trailing" constant="82" id="jAE-UF-tzj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BVW-6w-d89" secondAttribute="trailing" constant="82" id="jTy-Cs-dyb"/>
+                            <constraint firstItem="OSr-Wv-544" firstAttribute="leading" secondItem="U7T-3l-rjS" secondAttribute="leadingMargin" constant="45" id="o2V-hg-sYa"/>
                             <constraint firstAttribute="bottomMargin" secondItem="9dg-Ya-mkE" secondAttribute="bottom" id="oz0-FG-Md8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9dg-Ya-mkE" secondAttribute="trailing" constant="-16" id="tJw-Uv-5hC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iqR-WH-8vL"/>
                     </view>
                     <connections>
-                        <outlet property="debugTextField" destination="BVW-6w-d89" id="zDa-Jb-iRX"/>
+                        <outlet property="debugTextLabel" destination="OSr-Wv-544" id="dcs-Rk-Wat"/>
+                        <outlet property="finishButton" destination="rYI-bf-pNC" id="IEv-QI-wVB"/>
                         <outlet property="mapView" destination="9dg-Ya-mkE" id="6B0-qq-vp0"/>
                     </connections>
                 </viewController>
