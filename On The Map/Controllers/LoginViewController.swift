@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.view.bringSubview(toFront: loginButton)
         //get the app delegate
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         

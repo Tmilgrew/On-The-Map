@@ -69,38 +69,43 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func addLocation(_ sender: Any) {
+        activityIndicator.startAnimating()
         newStudent.latitude = coordinate.latitude as Double
         newStudent.longitude = coordinate.longitude as Double
         newStudent.mediaURL = url
         newStudent.mapString = mapString
         print(newStudent)
-        ParseClient.sharedInstance().postStudentLocation(newStudent) { (results, error) in
+        ParseClient.sharedInstance().postStudentLocation(newStudent) { (results, errorString) in
             
-            if error != nil {
-                self.displayError("\(error?.localizedDescription)")
+            if let error = errorString {
+                self.displayError("\(error)")
+            }else {
+                self.newStudent.objectID = results!["objectId"] as? String
+                performUIUpdatesOnMain {
+                    
+                    let controller = self.navigationController!.viewControllers[0]
+                    let _ = self.navigationController?.popToViewController(controller, animated: true)
+                    self.activityIndicator.stopAnimating()
+                }
             }
-            self.newStudent.objectID = results!["objectId"] as? String
-            performUIUpdatesOnMain {
-                
-                let controller = self.navigationController!.viewControllers[0]
-                let _ = self.navigationController?.popToViewController(controller, animated: true)
-                
-            }
-            
         }
         
         //post new location and then return to main screen.  call refresh
     }
     
     private func displayError(_ error: String?) {
-        finishButton.isEnabled = false
-        finishButton.backgroundColor = UIColor.gray
-        if let errorString = error {
-            debugTextLabel.text = errorString
-        } else {
-            debugTextLabel.text = "unkown error"
+        performUIUpdatesOnMain {
+            self.finishButton.isEnabled = false
+            self.finishButton.backgroundColor = UIColor.gray
+            if let errorString = error {
+                print(errorString as Any)
+                self.debugTextLabel.text = errorString
+            } else {
+                self.debugTextLabel.text = "unkown error"
+            }
+            self.activityIndicator.stopAnimating()
         }
-        activityIndicator.stopAnimating()
+        
     }
     
     

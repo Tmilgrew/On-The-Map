@@ -38,10 +38,10 @@ class UdacityClient : NSObject {
             
             func sendError(_ errorString: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
-
+                print(error as Any)
                 completionHandlerForPOST(nil, errorString)
             }
-            
+            print(response as Any)
             /* Was there an error? */
             guard error == nil else {
                 sendError(error?.localizedDescription as! String)
@@ -50,7 +50,7 @@ class UdacityClient : NSObject {
             
             /* Did it return a 200 status code */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("Invalid Credentials")
                 return
             }
             

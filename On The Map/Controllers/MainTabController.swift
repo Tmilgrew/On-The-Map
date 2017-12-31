@@ -49,7 +49,36 @@ class MainTabController: UITabBarController {
     
     
     @IBAction func logout(_ sender: Any) {
+        activityIndicator.startAnimating()
+        
+        UdacityClient.sharedInstance().deleteSession { (results, errorString) in
+
+//            if let error = errorString {
+//                self.displayError("\(error)")
+//            }else{
+//                performUIUpdatesOnMain {
+//                    
+//                    self.activityIndicator.stopAnimating()
+//                }
+//            }
+        }
         self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    private func displayError(_ error: String?) {
+        
+        if let errorString = error {
+            performUIUpdatesOnMain {
+                //self.debugTextLabel.text = String(errorString)
+                self.activityIndicator.stopAnimating()
+            }
+        } else {
+            performUIUpdatesOnMain {
+                //self.debugTextLabel.text = "unknown error"
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
     
 }

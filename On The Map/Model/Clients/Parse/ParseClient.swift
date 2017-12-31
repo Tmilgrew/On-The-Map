@@ -54,7 +54,7 @@ class ParseClient : NSObject {
         return task
     }
     
-    func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error:NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ errorString:String?) -> Void) -> URLSessionDataTask {
         
         let parameters = parameters
         
@@ -69,15 +69,15 @@ class ParseClient : NSObject {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             
-            func sendError(_ error: String) {
-                print(error)
+            func sendError(_ errorString: String) {
+                print(errorString)
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForPOST(nil, NSError(domain: "taskforPOSTMethod", code: 1, userInfo: userInfo))
+                completionHandlerForPOST(nil, errorString)
             }
             
             /* Was there an error? */
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error)")
+                sendError(error?.localizedDescription as! String)
                 return
             }
             

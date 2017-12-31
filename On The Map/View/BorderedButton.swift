@@ -8,10 +8,16 @@
 
 import UIKit
 
+
 @IBDesignable
 class BorderedButton: UIButton {
     
     // MARK: Properties
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
     
     // constants for styling and configuration
     let darkerBlue = UIColor(red: 0.0, green: 0.298, blue: 0.686, alpha:1.0)
@@ -36,6 +42,11 @@ class BorderedButton: UIButton {
         themeBorderedButton()
     }
     
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        themeBorderedButton()
+        
+    }
     private func themeBorderedButton() {
         layer.masksToBounds = true
         layer.cornerRadius = borderedButtonCornerRadius

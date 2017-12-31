@@ -26,6 +26,8 @@ class StudentListViewController: UIViewController{
                 self.students = results
                 performUIUpdatesOnMain {
                     self.studentTableView!.reloadData()
+                    self.studentTableView.layoutIfNeeded()
+                    self.studentTableView!.setContentOffset(.zero, animated: true)
                 }
             }else{
                 print (error ?? "empty error")

@@ -28,7 +28,7 @@ extension ParseClient {
         }
     }
     
-    func postStudentLocation(_ student: ParseStudent, completionHandlerForPostStudnet: @escaping (_ results: AnyObject?, _ errorString: NSError?) -> Void){
+    func postStudentLocation(_ student: ParseStudent, completionHandlerForPostStudnet: @escaping (_ results: AnyObject?, _ errorString: String?) -> Void){
         
         /*
          Fix the jsonBody string.  Pass in new student as parameter.
@@ -38,10 +38,10 @@ extension ParseClient {
         
         let method: String = Methods.MultiStudentLocation
         
-        let _ = taskForPOSTMethod(method, parameters: parameters, jsonBody: jsonBody) { (results, error) in
+        let _ = taskForPOSTMethod(method, parameters: parameters, jsonBody: jsonBody) { (results, errorString) in
             
-            if let error = error {
-                completionHandlerForPostStudnet(nil, error)
+            if let error = errorString {
+                completionHandlerForPostStudnet(nil, errorString)
             } else {
                 
                 completionHandlerForPostStudnet(results, nil)
