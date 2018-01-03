@@ -12,14 +12,14 @@ import MapKit
 
 class StudentMapViewController : UIViewController, MKMapViewDelegate {
     
-    //var students:[ParseStudent] = [ParseStudent]()
+    
     @IBOutlet weak var mapView: MKMapView!
     var students = Storage.students
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        self.refresh()
+        refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +59,7 @@ class StudentMapViewController : UIViewController, MKMapViewDelegate {
             }
         }
         
-        self.mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

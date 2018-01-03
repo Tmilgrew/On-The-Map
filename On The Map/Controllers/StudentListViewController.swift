@@ -43,6 +43,7 @@ class StudentListViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.studentTableView.reloadData()
     }
     
@@ -67,11 +68,18 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource 
         let student = students[(indexPath as NSIndexPath).row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         
-        cell?.textLabel!.text = "\(student.firstName as! String) \(student.lastName as! String)"
+        if let fName = student.firstName, let lName = student.lastName{
+            cell?.textLabel!.text = "\(fName) \(lName)"
+        } else {
+            cell?.textLabel!.text = "No User Name :("
+        }
         cell?.imageView!.image = UIImage(named: "icon_pin")
         cell?.imageView!.contentMode = UIViewContentMode.scaleAspectFit
-        cell?.detailTextLabel?.text = "\(student.mediaURL as! String)"
-        print(student.uniqueKey)
+        if let urlString = student.mediaURL{
+            cell?.detailTextLabel?.text = "\(urlString)"
+        } else {
+            cell?.detailTextLabel?.text = "No Media URL :("
+        }
         
         return cell!
         
