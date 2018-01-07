@@ -21,30 +21,24 @@ class MainTabController: UITabBarController {
         view.addSubview(activityIndicator)
     }
     
-    func refresh(){
-        activityIndicator.startAnimating()
-        ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
-            if let results = result {
-                self.students = results
-            } else {
-                print("There was an error refreshing.")
-            }
-        }
-        (self.viewControllers![0] as! StudentListViewController).refresh()
-        (self.viewControllers![1] as! StudentMapViewController).refresh()
-        activityIndicator.stopAnimating()
-    }
+
     
     @IBAction func refresh(sender: UIButton){
         ParseClient.sharedInstance().getMultipleStudents(){ (result, error) in
             if let results = result {
                 self.students = results
+                (self.viewControllers![0] as! StudentListViewController).refresh()
+                (self.viewControllers![1] as! StudentMapViewController).refresh()
             } else {
                 print("There was an error refreshing.")
+                let alertController = UIAlertController(title: "On The Map Alert", message: "Could not refresh feed", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
             }
         }
-        (self.viewControllers![0] as! StudentListViewController).refresh()
-        (self.viewControllers![1] as! StudentMapViewController).refresh()
+//        (self.viewControllers![0] as! StudentListViewController).refresh()
+//        (self.viewControllers![1] as! StudentMapViewController).refresh()
     }
     
     
@@ -53,32 +47,10 @@ class MainTabController: UITabBarController {
         
         UdacityClient.sharedInstance().deleteSession { (results, errorString) in
 
-//            if let error = errorString {
-//                self.displayError("\(error)")
-//            }else{
-//                performUIUpdatesOnMain {
-//                    
-//                    self.activityIndicator.stopAnimating()
-//                }
-//            }
+
         }
         self.dismiss(animated: true, completion: nil)
         
-    }
-    
-    private func displayError(_ error: String?) {
-        
-        if let errorString = error {
-            performUIUpdatesOnMain {
-                //self.debugTextLabel.text = String(errorString)
-                self.activityIndicator.stopAnimating()
-            }
-        } else {
-            performUIUpdatesOnMain {
-                //self.debugTextLabel.text = "unknown error"
-                self.activityIndicator.stopAnimating()
-            }
-        }
     }
     
 }

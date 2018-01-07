@@ -26,6 +26,21 @@ class NewLocationController: UIViewController {
         activityIndicator.hidesWhenStopped = true
         view.addSubview(activityIndicator)
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        guard let location = locationTextField.text, location != "" else {
+            displayError("Please enter a location")
+            return false
+        }
+        
+        guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
+            displayError("Please enter a URL")
+            return false
+        }
+        
+        return true
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         activityIndicator.startAnimating()
@@ -34,10 +49,10 @@ class NewLocationController: UIViewController {
             
             debugText.text = ""
             
-            guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
-                displayError("Please enter a portfolio domain")
-                return
-            }
+//            guard let portfolioURL = portfolioTextField.text, portfolioURL != "" else {
+//                displayError("Please enter a portfolio domain")
+//                return
+//            }
             
             guard let location = locationTextField.text, location != "" else {
                 displayError("Please enter your city and state")

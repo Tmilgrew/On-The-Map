@@ -31,6 +31,9 @@ class StudentMapViewController : UIViewController, MKMapViewDelegate {
                 }
             }else{
                 print (error ?? "empty error")
+                let alertController = UIAlertController(title: "On The Map Alert", message: "Could not load data at this time.", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

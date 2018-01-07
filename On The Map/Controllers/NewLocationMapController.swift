@@ -99,8 +99,10 @@ class NewLocationMapController: UIViewController, MKMapViewDelegate {
             self.finishButton.backgroundColor = UIColor.gray
             if let errorString = error {
                 print(errorString as Any)
+                self.debugTextLabel.backgroundColor = UIColor.white
                 self.debugTextLabel.text = errorString
             } else {
+                self.debugTextLabel.backgroundColor = UIColor.white
                 self.debugTextLabel.text = "unkown error"
             }
             self.activityIndicator.stopAnimating()
